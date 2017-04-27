@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NewsLight</string>
+    <string name="article_image">Article image</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="eng">eng</string>
+    <string name="de">de</string>
+</resources>
