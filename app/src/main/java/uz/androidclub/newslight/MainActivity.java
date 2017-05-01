@@ -1,29 +1,79 @@
 package uz.androidclub.newslight;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Switch;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
 
+import uz.androidclub.newslight.adapter.ArticleListAdapter;
+import uz.androidclub.newslight.presenter.vo.Article;
+
+public class MainActivity extends AppCompatActivity implements MainView{
+    MainPresenterImpl presenter;
+    ArticleListAdapter articleListAdapter;
+
+    @SuppressWarnings("UncheckedException")
+    View $(int resId){
+        return findViewById(resId);
+    }
+
+    Toolbar toolbar;
+    Spinner spinner;
+    Switch aSwitch;
+    RecyclerView recyclerArticles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) $(R.id.toolbar);
+        spinner = (Spinner) $(R.id.spinner_sources);
+        aSwitch = (Switch) $(R.id.switchLang);
+        recyclerArticles = (RecyclerView) $(R.id.recycler_articles);
+        recyclerArticles.setLayoutManager(new LinearLayoutManager(this));
         setSupportActionBar(toolbar);
+        setTitle("");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        presenter = new MainPresenterImpl(this);
     }
 
+    @Override
+    public void showSourceMenu(ArrayAdapter<String> adapter) {
+        spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void showArticleList(List<Article> list) {
+        articleListAdapter = new ArticleListAdapter(list);
+        recyclerArticles.setAdapter(articleListAdapter);
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
+    @Override
+    public void showActivityLoading() {
+
+    }
+
+    @Override
+    public void hideActivityLoading() {
+
+    }
+
+    @Override
+    public Context getViewContext() {
+        return this;
+    }
 }

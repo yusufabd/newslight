@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/article_image"
         android:layout_width="match_parent"
-        android:layout_height="176dp"
+        android:layout_height="@dimen/article_image_height"
         android:contentDescription="@string/article_image"
         android:background="@color/colorAccent"/>
 
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/article_author_font_size"
             android:textColor="@color/white"
-            android:text="ARTICLE AUTHOR"/>
+            android:text="@string/article_author"/>
 
         <TextView
             android:id="@+id/article_title"
@@ -31,7 +31,7 @@
             android:textSize="@dimen/article_title_font_size"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:text="Article titleArticle titleArticle titleArticle titleArticle tiqqqtle"
+            android:text="@string/article_title"
             android:maxLines="2"
             android:ellipsize="end"
             android:layout_below="@+id/article_author"/>

@@ -1,5 +1,7 @@
 package uz.androidclub.newslight;
 
+import android.view.View;
+
 /**
  * Created by yusufabd on 4/26/2017.
  */
@@ -28,4 +30,9 @@ public class AppConstants {
     public static final String COUNTRY_ITALY = "it";
     public static final String COUNTRY_USA = "us";
 
+
+    @SuppressWarnings("UncheckedException")
+    View $(View root, int resId){
+        return root.findViewById(resId);
+    }
 }
