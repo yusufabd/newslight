@@ -1,10 +1,12 @@
 package uz.androidclub.newslight.presenter.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by yusufabd on 4/26/2017.
  */
 
-public class Article {
+public class Article implements Serializable{
 
     private String author, title, url, imageUrl;
 

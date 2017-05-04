@@ -1,7 +1,5 @@
 package uz.androidclub.newslight.retro;
 
-import java.util.ArrayList;
-
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

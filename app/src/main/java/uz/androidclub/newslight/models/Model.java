@@ -1,4 +1,4 @@
-package uz.androidclub.newslight;
+package uz.androidclub.newslight.models;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import uz.androidclub.newslight.retro.response.models.SourceDTO;
 
 public interface Model {
     Observable<List<SourceDTO>> getSourceList(String category, String language);
-    Observable<List<ArticleDTO>> getArticleList(String source);
+    Observable<List<ArticleDTO>> getArticleList(String source, List<String> sort);
 }

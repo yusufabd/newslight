@@ -1,18 +1,18 @@
 package uz.androidclub.newslight;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
-
 import java.util.List;
 
 import uz.androidclub.newslight.presenter.vo.Article;
+import uz.androidclub.newslight.presenter.vo.Category;
 
 /**
  * Created by yusufabd on 4/26/2017.
  */
 
 public interface MainView {
-    void showSourceMenu(ArrayAdapter<String> adapter);
+    void buildDrawer(List<Category> list);
+    void showSourceMenu(List<String> strings);
     void showArticleList(List<Article> list);
     void showError(String error);
     void showActivityLoading();

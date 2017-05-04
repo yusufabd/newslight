@@ -41,6 +41,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         holder.mAuthor.setText(item.getAuthor());
         Glide.with(mCtx)
                 .load(item.getImageUrl())
+                .centerCrop()
                 .into(holder.mImage);
     }
 

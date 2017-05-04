@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/article_image"
@@ -12,9 +13,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/colorPrimaryDark"
-        android:padding="8dp">
+        android:layout_height="80dp"
+        android:background="@drawable/title_gradient"
+        android:padding="8dp"
+        android:layout_alignBottom="@id/article_image">
 
         <TextView
             android:id="@+id/article_author"
@@ -39,4 +41,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

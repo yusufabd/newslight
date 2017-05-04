@@ -1,12 +1,13 @@
 
 package uz.androidclub.newslight.retro.response;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 import uz.androidclub.newslight.retro.response.models.ArticleDTO;
 
@@ -22,7 +23,7 @@ public class ArticleResponse implements Parcelable
     @SerializedName("sortBy")
     @Expose
     private String sortBy;
-    @SerializedName("articleDTOs")
+    @SerializedName("articles")
     @Expose
     private List<ArticleDTO> articleDTOs = null;
     public final static Parcelable.Creator<ArticleResponse> CREATOR = new Creator<ArticleResponse>() {

@@ -7,6 +7,9 @@ import android.view.View;
  */
 
 public class AppConstants {
+    public static final String PREF_FILE_NAME = "news_light_pref";
+    public static final String PREF_KEY_LANG = "key_lang";
+
     public static final String NEWS_API_KEY = "dcb737fbf09c4bd6ba5c128be1e443e9";
 
     public static final String SORT_BY_LATEST = "latest";
@@ -29,6 +32,8 @@ public class AppConstants {
     public static final String COUNTRY_INDIA = "in";
     public static final String COUNTRY_ITALY = "it";
     public static final String COUNTRY_USA = "us";
+    public static String ENG = "en";
+    public static String DE = "de";
 
 
     @SuppressWarnings("UncheckedException")

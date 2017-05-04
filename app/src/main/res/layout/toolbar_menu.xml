@@ -19,9 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:textOn="@string/eng"
-        android:textOff="@string/de"
+        android:textOn="@string/de"
+        android:textOff="@string/eng"
         android:textColor="@color/white"
+        android:showText="true"
         android:thumb="@drawable/switch_selector"
         android:track="@drawable/switch_track"/>
 

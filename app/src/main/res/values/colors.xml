@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#EF5350</color>
     <color name="colorPrimaryDark">#ce1a17</color>
-    <color name="colorAccent">#0d07c6</color>
+    <color name="colorAccent">#000000</color>
 
     <item name="white" type="color">#ffffff</item>
     <item name="black" type="color">#000000</item>
@@ -26,4 +26,6 @@
     <item name="gray" type="color">#9e9e9e</item>
     <item name="bluegray" type="color">#607d8b</item>
     <item name="indigo" type="color">#3f51b5</item>
+    <item name="deepblue" type="color">#041da7</item>
+    <item name="deepred" type="color">#d11002</item>
 </resources>
