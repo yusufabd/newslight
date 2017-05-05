@@ -1,9 +1,14 @@
 package uz.androidclub.newslight;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
         return findViewById(resId);
     }
 
+    private DrawerLayout mDrawer;
     private ConstraintLayout constraintParent;
     private Toolbar toolbar;
     private Spinner spinner;
@@ -49,20 +55,7 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
         setContentView(R.layout.activity_main);
         presenter = new MainPresenterImpl(this);
         pref = new AppPreferences(this);
-        constraintParent = (ConstraintLayout) $(R.id.constraint_parent);
-        toolbar = (Toolbar) $(R.id.toolbar);
-        spinner = (Spinner) $(R.id.spinner_sources);
-        aSwitch = (Switch) $(R.id.switchLang);
-        aSwitch.setChecked(pref.getLang());
-        aSwitch.setOnCheckedChangeListener(this);
-        progressBar = (ProgressBar) $(R.id.progress_bar);
-        recyclerCategories = (RecyclerView) $(R.id.recycler_categories);
-        recyclerCategories.setLayoutManager(new LinearLayoutManager(this));
-        recyclerArticles = (RecyclerView) $(R.id.recycler_articles);
-        recyclerArticles.setLayoutManager(new LinearLayoutManager(this));
-        setSupportActionBar(toolbar);
-        setTitle("");
-
+        initUIElements();
         presenter.onCreate(savedInstanceState);
     }
 
@@ -91,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
     public void showArticleList(List<Article> list) {
         ArticleListAdapter articleListAdapter = new ArticleListAdapter(list);
         recyclerArticles.setAdapter(articleListAdapter);
+        ItemClickSupport.addTo(recyclerArticles).setOnItemClickListener((recyclerView, position, v) -> {
+            startWebActivity(list.get(position));
+        });
     }
 
     @Override
@@ -107,6 +103,16 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
     @Override
     public void hideActivityLoading() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void startWebActivity(Article article) {
+        CustomTabsIntent.Builder tabsBuilder = new CustomTabsIntent.Builder();
+        tabsBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+        tabsBuilder.setInstantAppsEnabled(true);
+        tabsBuilder.setShowTitle(true);
+        tabsBuilder.addDefaultShareMenuItem();
+        tabsBuilder.build().launchUrl(this, Uri.parse(article.getUrl()));
     }
 
     @Override
@@ -132,5 +138,36 @@ public class MainActivity extends AppCompatActivity implements MainView, Adapter
     @Override
     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
         presenter.onCategorySelect(position);
+        closeDrawer();
     }
+
+    private void initUIElements(){
+        mDrawer = (DrawerLayout) $(R.id.drawer_layout);
+        constraintParent = (ConstraintLayout) $(R.id.constraint_parent);
+        toolbar = (Toolbar) $(R.id.toolbar);
+        spinner = (Spinner) $(R.id.spinner_sources);
+        aSwitch = (Switch) $(R.id.switchLang);
+        aSwitch.setChecked(pref.getLang());
+        aSwitch.setOnCheckedChangeListener(this);
+        progressBar = (ProgressBar) $(R.id.progress_bar);
+        recyclerCategories = (RecyclerView) $(R.id.recycler_categories);
+        recyclerCategories.setLayoutManager(new LinearLayoutManager(this));
+        recyclerArticles = (RecyclerView) $(R.id.recycler_articles);
+        recyclerArticles.setLayoutManager(new LinearLayoutManager(this));
+        setSupportActionBar(toolbar);
+        setTitle("");
+        setNavigationDrawer();
+    }
+
+    private void closeDrawer(){
+        mDrawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void setNavigationDrawer(){
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
 }

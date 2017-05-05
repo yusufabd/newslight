@@ -40,4 +40,6 @@ public class AppConstants {
     View $(View root, int resId){
         return root.findViewById(resId);
     }
+
+    public static final String ARTICLE_LINK_EXTRA_KEY = "extra_key_article_link";
 }

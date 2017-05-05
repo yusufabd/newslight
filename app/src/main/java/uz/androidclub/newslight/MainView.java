@@ -17,6 +17,7 @@ public interface MainView {
     void showError(String error);
     void showActivityLoading();
     void hideActivityLoading();
+    void startWebActivity(Article article);
 
     Context getViewContext();
 }

@@ -34,13 +34,13 @@ public class MainPresenterImpl extends AppConstants implements MainPresenter {
     private List<Article> mArticles;
     private List<Category> mCats;
     private AppPreferences mPref;
-    private String mlang;
+    private String mLang;
 
     public MainPresenterImpl(MainView mView) {
         this.mView = mView;
         mModel = new ModelImpl();
         mPref = new AppPreferences(mView.getViewContext());
-        mlang = mPref.getLang() ? DE : ENG;
+        mLang = mPref.getLang() ? DE : ENG;
         mCats = new ArrayList<>();
     }
 
@@ -68,14 +68,14 @@ public class MainPresenterImpl extends AppConstants implements MainPresenter {
 
     @Override
     public void onCategorySelect(int position) {
-        onLoadSourceList(mCats.get(position).getId(), mlang);
+        onLoadSourceList(mCats.get(position).getId(), mLang);
     }
 
     @Override
     public void onLanguageSelect(boolean isDe) {
         mPref.setLang(isDe);
 
-        mlang = mPref.getLang() ? DE : ENG;
+        mLang = mPref.getLang() ? DE : ENG;
         onCreate(null);
     }
 
